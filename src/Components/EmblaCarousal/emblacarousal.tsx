@@ -58,7 +58,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({ items }) => {
             xmlns="http://www.w3.org/2000/svg"
           >
             <g>
-              <path d="M28 38L12 21L28 3" stroke="white" stroke-width="4" />
+              <path d="M28 38L12 21L28 3" stroke="white" strokeWidth={4} />
             </g>
           </svg>
         </button>
@@ -76,7 +76,7 @@ const EmblaCarousel: React.FC<EmblaCarouselProps> = ({ items }) => {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path d="M12 3L28 20L12 38" stroke="white" stroke-width="4" />
+            <path d="M12 3L28 20L12 38" stroke="white" strokeWidth={4} />
           </svg>
         </button>
       </div>
