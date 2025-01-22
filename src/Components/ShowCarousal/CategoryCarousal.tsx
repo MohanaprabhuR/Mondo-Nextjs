@@ -53,7 +53,6 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
       <h2 className="text-white">{genre.name}</h2>
       <EmblaCarousel
         items={matchedShows.map((show) => {
-          // Group videos by season
           const groupedVideos = _.groupBy(show.videos, "season");
           const seasons = Object.keys(groupedVideos);
           const [selectedSeason, setSelectedSeason] = useState<string | null>(
@@ -116,12 +115,20 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
                           </div>
 
                           <div className="mt-4">
-                            <ul className="list-disc pl-4">
+                            <ul className="list-disc pl-4 flex flex-wrap">
                               {(
                                 groupedVideos[selectedSeason!] ||
                                 groupedVideos[seasons[0]]
                               ).map((video) => (
-                                <li key={video.id}>{video.name}</li>
+                                <li key={video.id}>
+                                  <Image
+                                    src={video.poster}
+                                    alt={show.name}
+                                    width={184}
+                                    height={275}
+                                    className="object-cover rounded"
+                                  />
+                                </li>
                               ))}
                             </ul>
                           </div>
