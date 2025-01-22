@@ -11,7 +11,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
   DrawerClose,
-} from "@/components/ui/drawer";
+} from "@/Components/ui/drawer";
 import _ from "lodash";
 
 interface Video {
