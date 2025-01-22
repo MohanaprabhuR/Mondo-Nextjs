@@ -15,6 +15,7 @@ import {
 import _ from "lodash";
 
 interface Video {
+  poster: string;
   id: number;
   name: string;
   season: number;
