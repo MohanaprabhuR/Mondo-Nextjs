@@ -1,5 +1,5 @@
 import HeroCarousel from "@/Components/HeroSection/herocarousal";
-import ShowCarousal from "@/Components/ShowCarousal/ShowCarousal";
+// import ShowCarousal from "@/Components/ShowCarousal/ShowCarousal";
 import GenreCarouselItem from "@/Components/ShowCarousal/CategoryCarousal";
 
 export default async function Shows() {
