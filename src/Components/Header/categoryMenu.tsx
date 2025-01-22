@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface Show {
+  poster: string;
   id: string;
   name: string;
 }
