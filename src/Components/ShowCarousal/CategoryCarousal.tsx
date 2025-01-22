@@ -55,6 +55,7 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
         items={matchedShows.map((show) => {
           const groupedVideos = _.groupBy(show.videos, "season");
           const seasons = Object.keys(groupedVideos);
+          // eslint-disable-next-line react-hooks/rules-of-hooks
           const [selectedSeason, setSelectedSeason] = useState<string | null>(
             seasons[0]
           );
