@@ -18,11 +18,16 @@ interface CategoryList {
   data: Category[];
 }
 
+interface AllShows {
+  data: Show[];
+}
+
 const CategoryMenu = ({
   categorylist,
   allshows,
 }: {
   categorylist: CategoryList;
+  allshows: AllShows;
 }) => {
   console.log(categorylist, "categorylist");
   console.log("allshows", allshows);

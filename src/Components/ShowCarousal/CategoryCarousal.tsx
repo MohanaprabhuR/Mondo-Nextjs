@@ -48,6 +48,21 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
     genre.shows.some((genreshow) => genreshow.id === show.id)
   );
 
+  const [selectedSeasons, setSelectedSeasons] = useState<{
+    [showId: number]: string | null;
+  }>(() =>
+    matchedShows.reduce((acc, show) => {
+      const groupedVideos = _.groupBy(show.videos, "season");
+      const seasons = Object.keys(groupedVideos);
+      acc[show.id] = seasons[0] || null;
+      return acc;
+    }, {} as { [showId: number]: string | null })
+  );
+
+  const handleSeasonChange = (showId: number, season: string) => {
+    setSelectedSeasons((prev) => ({ ...prev, [showId]: season }));
+  };
+
   return (
     <div className="">
       <h2 className="text-white">{genre.name}</h2>
@@ -55,10 +70,6 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
         items={matchedShows.map((show) => {
           const groupedVideos = _.groupBy(show.videos, "season");
           const seasons = Object.keys(groupedVideos);
-          // eslint-disable-next-line react-hooks/rules-of-hooks
-          const [selectedSeason, setSelectedSeason] = useState<string | null>(
-            seasons[0]
-          );
 
           return (
             <div key={show.id}>
@@ -95,9 +106,9 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
                               <>
                                 <select
                                   id={`season-select-${show.id}`}
-                                  value={selectedSeason || ""}
+                                  value={selectedSeasons[show.id] || ""}
                                   onChange={(e) =>
-                                    setSelectedSeason(e.target.value)
+                                    handleSeasonChange(show.id, e.target.value)
                                   }
                                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 >
@@ -118,7 +129,7 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
                           <div className="mt-4">
                             <ul className="list-disc pl-4 flex flex-wrap">
                               {(
-                                groupedVideos[selectedSeason!] ||
+                                groupedVideos[selectedSeasons[show.id]!] ||
                                 groupedVideos[seasons[0]]
                               ).map((video) => (
                                 <li key={video.id}>
