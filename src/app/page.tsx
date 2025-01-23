@@ -18,9 +18,9 @@ export default async function Shows() {
       <HeroCarousel shows={shows.data} />
       <section className="mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-[1280px] flex flex-col space-y-10 pb-[18px] pt-[50px] sm:space-y-12 sm:overflow-visible sm:pb-[107px]">
         {/* <ShowCarousal shows={shows.data} /> */}
-        {generdetails.data.map((genre) => (
+        {generdetails.data.map((genre: string, index: number) => (
           <GenreCarouselItem
-            key={genre.id}
+            key={index} // Use index as a unique key if genre doesn't have an id
             genre={genre}
             allShows={shows.data}
           />
