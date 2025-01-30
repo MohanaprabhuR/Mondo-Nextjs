@@ -3,10 +3,11 @@ import Link from "next/link";
 import CategoryMenu from "@/Components/Header/categoryMenu";
 
 export default async function Header() {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/category`);
+  const data = await fetch(`${process.env.API_URL}/api/genres?populate=*`);
   const category = await data.json();
 
-  const showdata = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/shows`);
+
+  const showdata = await fetch(`${process.env.API_URL}/api/shows?populate=*`);
   const shows = await showdata.json();
 
   return (

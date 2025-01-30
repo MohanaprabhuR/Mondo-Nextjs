@@ -2,8 +2,17 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
 interface Show {
+  cast_and_crew: any;
   poster: { src: string };
   id: string;
   name: string;
@@ -30,16 +39,12 @@ const CategoryMenu = ({
   categorylist: CategoryList;
   allshows: AllShows;
 }) => {
-  console.log(categorylist, "categorylist");
-  console.log("allshows", allshows);
-
   const [openCategoryId, setOpenCategoryId] = useState<string | null>(null);
   const [hoveredShowId, setHoveredShowId] = useState<string | null>(null);
 
   const toggleCategory = (categoryId: string) => {
     setOpenCategoryId((prev) => (prev === categoryId ? null : categoryId));
   };
-
   return (
     <nav className="p-4">
       <ul className="flex flex-wrap gap-6">
@@ -59,13 +64,55 @@ const CategoryMenu = ({
                   {category.shows.map((show) => (
                     <li
                       key={show.id}
-                      className="show-name py-2 hover:bg-gray-500 relative  mx-auto flex rounded-lg w-full items-center justify-between px-4 xl:max-w-[1280px] "
+                      className="show-name py-2 hover:bg-gray-500 relative mx-auto flex rounded-lg w-full items-center justify-between px-4 xl:max-w-[1280px]"
                       onMouseEnter={() => setHoveredShowId(show.id)}
                       onMouseLeave={() => setHoveredShowId(null)}
                     >
-                      <Link href="#" className="text-white block w-full ">
-                        {show.name}
-                      </Link>
+                      <Drawer>
+                        <DrawerTrigger className="text-left w-full">
+                          <span className="text-white block w-full">
+                            {show.name}
+                          </span>
+                        </DrawerTrigger>
+                        <DrawerContent>
+                          <DrawerHeader>
+                            <DrawerTitle>{show.name}</DrawerTitle>
+                            <DrawerDescription className="flex gap-4">
+                              <div>
+                                <p className="text-black">{show.description}</p>
+                                <ul className="flex space-x-2 flex-wrap">
+                                  {show.cast_and_crew
+                                    ?.slice(0, 10)
+                                    .map((member) => (
+                                      <li className="list-disc" key={member.id}>
+                                        {member.name}
+                                      </li>
+                                    ))}
+                                </ul>
+                              </div>
+                              <div>
+                                {allshows.data.map(
+                                  (allshow) =>
+                                    allshow.id === show.id && (
+                                      <div
+                                        key={allshow.id}
+                                        className="rounded-xl overflow-hidden"
+                                      >
+                                        <Image
+                                          src={allshow.poster.src}
+                                          alt={allshow.name}
+                                          width={250}
+                                          height={275}
+                                        />
+                                      </div>
+                                    )
+                                )}
+                              </div>
+                            </DrawerDescription>
+                          </DrawerHeader>
+                        </DrawerContent>
+                      </Drawer>
+
                       {hoveredShowId === show.id && (
                         <div className="show-banner-image flex gap-2 mt-2 absolute right-0 top-0">
                           {allshows.data.map(

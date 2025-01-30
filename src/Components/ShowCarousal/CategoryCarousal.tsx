@@ -49,6 +49,7 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
     genre.shows.some((genreshow) => genreshow.id === show.id)
   );
 
+
   const [selectedSeasons, setSelectedSeasons] = useState<{
     [showId: number]: string | null;
   }>(() =>
@@ -63,6 +64,8 @@ const GenreCarouselItem: React.FC<GenreCarouselItemProps> = ({
   const handleSeasonChange = (showId: number, season: string) => {
     setSelectedSeasons((prev) => ({ ...prev, [showId]: season }));
   };
+
+
 
   return (
     <div className="">
