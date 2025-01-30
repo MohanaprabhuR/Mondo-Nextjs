@@ -28,6 +28,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/Components/ShowCarousal"
-  ],
+, "next.config.mjs"  ],
   "exclude": ["node_modules"]
 }
