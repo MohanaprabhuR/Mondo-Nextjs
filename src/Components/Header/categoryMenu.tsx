@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { ReactNode } from 'react';
 import {
   Drawer,
   DrawerContent,
@@ -12,8 +12,14 @@ import {
 } from "@/Components/ui/drawer";
 
 interface Show {
-  cast_and_crew: any;
-  poster: { src: string };
+  description: ReactNode;
+  cast_and_crew: {
+    id: string;    
+    name: string;
+  }[];
+  poster: { 
+    src: string;
+  };
   id: string;
   name: string;
 }
